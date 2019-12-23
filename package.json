@@ -1,0 +1,82 @@
+{
+  "name": "@serverless/tencent-egg",
+  "description": "Tencent Cloud Egg.js Serverless Component",
+  "version": "0.1.0-alpha.0",
+  "main": "serverless.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "egg.js",
+    "serverless",
+    "serverless-component",
+    "serverlesscomponent",
+    "tencent"
+  ],
+  "scripts": {
+    "commitlint": "commitlint -f HEAD@{15}",
+    "test": "tape *.test.js",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "lint:fix": "eslint --fix --ext .js,.ts,.tsx .",
+    "prettier": "prettier --check **/*.{css,html,js,json,md,yaml,yml}",
+    "prettier:fix": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
+    "release": "standard-version"
+  },
+  "author": "Tencent Cloud, Inc.",
+  "license": "Apache-2.0",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.*": [
+      "eslint --fix --ext .js,.ts,.tsx .",
+      "git add"
+    ],
+    "**/*.{css,html,js,json,md,yaml,yml}": [
+      "prettier -c",
+      "git add"
+    ]
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
+  },
+  "dependencies": {
+    "@serverless/core": "^1.1.1",
+    "@serverless/tencent-apigateway": "^2.0.0",
+    "@serverless/tencent-scf": "^2.0.1",
+    "ext": "^1.4.0",
+    "type": "^2.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "babel-eslint": "9.0.0",
+    "eslint": "5.6.0",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "github-release-from-cc-changelog": "^2.2.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.15.3",
+    "standard-version": "^7.0.1",
+    "tape": "^4.12.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serverless-components/tencent-egg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/serverless-components/tencent-egg/issues"
+  },
+  "homepage": "https://github.com/serverless-components/tencent-egg#readme"
+}
