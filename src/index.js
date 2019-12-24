@@ -102,6 +102,8 @@ class TencentEgg extends Component {
       }/${tencentApiGatewayOutputs.environment}/`
     }
 
+    this.state = outputs
+
     await this.save()
 
     return outputs
