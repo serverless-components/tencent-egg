@@ -12,11 +12,11 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
+/* eslint-disable */
 const http = require('http')
 const url = require('url')
-const binarycase = require('binary-case')
-const isType = require('type-is')
+const binarycase = require('./binary-case')
+const isType = require('./type-is')
 
 function getPathWithQueryStringParams(event) {
   return url.format({ pathname: event.path, query: event.queryStringParameters })

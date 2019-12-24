@@ -35,10 +35,7 @@ class TencentEgg extends Component {
     inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
 
     const shimsDir = path.join(__dirname, 'shims')
-    inputs.include = [
-      path.join(shimsDir, 'aws-serverless-express.js'),
-      path.join(shimsDir, 'entry.js')
-    ]
+    inputs.include = [shimsDir]
     inputs.exclude.push('.git/**', '.gitignore', '.serverless', '.DS_Store')
 
     inputs.handler = ensureString(inputs.handler, { default: DEFAULTS.handler })
