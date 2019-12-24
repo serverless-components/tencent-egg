@@ -1,10 +1,10 @@
 # 腾讯云 Egg.js Serverless Component
 
-简体中文 | [English](https://github.com/serverless-components/tencent-egg/tree/master/README.en.md)
+简体中文 | [English](https://github.com/serverless-components/tencent-egg/blob/master/README.en.md)
 
 ## 简介
 
-腾讯云 [Egg.js](https://github.com/eggjs/egg) Serverless Component, 支持 Restful API 服务的部署，暂不支持静态资源访问。
+腾讯云 [Egg.js](https://github.com/eggjs/egg) Serverless Component, 支持 Restful API 服务的部署。
 
 ## 目录
 
@@ -17,7 +17,17 @@
 
 ### 0. 准备
 
-由于云函数在执行时，只有 `/tmp` 可读写的，所以我们需要将 `egg.js` 框架运行尝试的日志写到该目录下，为此需要修改 `config.default.js` 中的配置如下：
+#### 初始化 Egg 项目
+
+```shell
+$ mkdir egg-example && cd egg-example
+$ npm init egg --type=simple
+$ npm i
+```
+
+#### 修改 Egg 配置
+
+由于云函数在执行时，只有 `/tmp` 可读写的，所以我们需要将 `egg.js` 框架运行尝试的日志写到该目录下，为此需要修改 `config/config.default.js` 中的配置如下：
 
 ```js
 const config = exports = {
@@ -39,7 +49,7 @@ $ npm install -g serverless
 
 ### 2. 配置
 
-本地创建 `serverless.yml` 文件，在其中进行如下配置
+在项目根目录创建 `serverless.yml` 文件，在其中进行如下配置
 
 ```shell
 $ touch serverless.yml

@@ -1,10 +1,10 @@
 # Tencent Egg.js Serverless Component
 
-[简体中文](https://github.com/serverless-components/tencent-egg/tree/master/README.md) | English
+[简体中文](https://github.com/serverless-components/tencent-egg/blob/master/README.md) | English
 
 ## Introduction
 
-[Egg.js](https://github.com/eggjs/egg) Serverless Component for Tencent Cloud, support Restful API deploy, not supportting static assets request.
+[Egg.js](https://github.com/eggjs/egg) Serverless Component for Tencent Cloud, support Restful API deploy.
 
 ## Content
 
@@ -16,6 +16,16 @@
 5. [Remove](#5-Remove)
 
 ### 0. Prepare
+
+#### Init Egg Project
+
+```shell
+$ mkdir egg-example && cd egg-example
+$ npm init egg --type=simple
+$ npm i
+```
+
+#### Change Egg Config
 
 When cloud funtion executing, only `/tmp` folder is writable, so we need change the folder of logging for `egg.js`, then we change the configuration in `config/config.default.js` as below:
 
@@ -39,7 +49,7 @@ $ npm install -g serverless
 
 ### 2. Create
 
-Just create the following simple boilerplate:
+In project root, create the following simple boilerplate:
 
 ```shell
 $ touch serverless.yml
@@ -81,7 +91,7 @@ MyComponent:
       environment: release
 ```
 
-- [More Options](https://github.com/serverless-components/tencent-egg/tree/master/docs/configure.md)
+- [More Options](https://github.com/serverless-components/tencent-egg/blob/master/docs/configure.md)
 
 ### 4. Deploy
 
