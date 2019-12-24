@@ -1,6 +1,6 @@
 # 腾讯云 Egg.js Serverless Component
 
-简体中文 | [English](./README.en.md)
+简体中文 | [English](https://github.com/serverless-components/tencent-egg/tree/master/README.en.md)
 
 ## 简介
 

@@ -6,7 +6,6 @@
 # serverless.yml
 
 egg:
-  region: ap-guangzhou
   component: '@serverless/tencent-egg'
   inputs:
     region: ap-guangzhou
@@ -14,9 +13,6 @@ egg:
     serviceName: mytest
     serviceId: service-np1uloxw
     code: ./
-    cosConf:
-      cosUrl: https://cdn
-      cosPath: /
     functionConf:
       timeout: 10
       memorySize: 128

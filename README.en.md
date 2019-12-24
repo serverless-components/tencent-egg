@@ -1,6 +1,6 @@
 # Tencent Egg.js Serverless Component
 
-[简体中文](./README.md) | English
+[简体中文](https://github.com/serverless-components/tencent-egg/tree/master/README.md) | English
 
 ## Introduction
 
