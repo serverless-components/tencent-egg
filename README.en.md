@@ -1,3 +1,6 @@
+[![Serverless Egg Tencent Cloud](https://img.serverlesscloud.cn/20191226/1577361751088-egg_width.png)](http://serverless.com)
+
+
 # Tencent Egg.js Serverless Component
 
 [简体中文](https://github.com/serverless-components/tencent-egg/blob/master/README.md) | English
