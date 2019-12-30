@@ -31,13 +31,13 @@
     }
   },
   "lint-staged": {
-    "**/*.*": [
+    "**/*.{js,ts,tsx}": [
       "eslint --fix --ext .js,.ts,.tsx .",
-      "git add"
+      "git add ."
     ],
     "**/*.{css,html,js,json,md,yaml,yml}": [
       "prettier -c",
-      "git add"
+      "git add ."
     ]
   },
   "standard-version": {
@@ -48,7 +48,7 @@
   "dependencies": {
     "@serverless/core": "^1.1.1",
     "@serverless/tencent-apigateway": "^2.0.0",
-    "@serverless/tencent-scf": "^2.0.1",
+    "@serverless/tencent-scf": "^2.0.2",
     "ext": "^1.4.0",
     "type": "^2.0.0"
   },
