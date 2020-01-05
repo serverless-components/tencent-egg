@@ -1,5 +1,5 @@
 MyEgg:
-  component: ../
+  component: '@serverless/tencent-egg'
   inputs:
     region: ap-guangzhou
     functionName: egg-function
