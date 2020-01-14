@@ -87,12 +87,7 @@ function forwardResponseToApiGateway(server, response, resolver) {
       // headers with the same name, as discussed on the AWS Forum https://forums.aws.amazon.com/message.jspa?messageID=725953#725953
       Object.keys(headers).forEach((h) => {
         if (Array.isArray(headers[h])) {
-          if (h.toLowerCase() === 'set-cookie') {
-            headers[h].forEach((value, i) => {
-              headers[binarycase(h, i + 1)] = value
-            })
-            delete headers[h]
-          } else {
+          if (h.toLowerCase() !== 'set-cookie') {
             headers[h] = headers[h].join(',')
           }
         }
