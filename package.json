@@ -1,7 +1,7 @@
 {
   "name": "@serverless/tencent-egg",
   "description": "Tencent Cloud Egg.js Serverless Component",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "serverless.js",
   "publishConfig": {
     "access": "public"

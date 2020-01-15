@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/serverless-components/tencent-egg/compare/v0.1.6...v0.1.7) (2020-01-15)
+
+
+### Bug Fixes
+
+* change tencent-serverless-nodejs to tencent-serverless-http ([79844de](https://github.com/serverless-components/tencent-egg/commit/79844def51d30ec12f029c914b7997ef7a6921f5))
+* example serverless.yml ([7e55322](https://github.com/serverless-components/tencent-egg/commit/7e553229fa7864e91c43a08d594cf939a2219f43))
+
 ### [0.1.6](https://github.com/serverless-components/tencent-egg/compare/v0.1.5...v0.1.6) (2020-01-15)
 
 
