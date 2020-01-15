@@ -4,10 +4,10 @@ const ensureString = require('type/string/ensure')
 const random = require('ext/string/random')
 const path = require('path')
 const { Component } = require('@serverless/core')
+const resolveCachedHandlerPath = require('./shims/lib/resolve-cached-handler-path')
 
 const DEFAULTS = {
   runtime: 'Nodejs8.9',
-  handler: 'entry.handler',
   exclude: ['.git/**', '.gitignore', '.serverless', '.DS_Store', 'run', 'logs']
 }
 
@@ -34,11 +34,11 @@ class TencentEgg extends Component {
     inputs.exclude = ensureIterable(inputs.exclude, { default: [], ensureItem: ensureString })
     inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
 
-    const shimsDir = path.join(__dirname, 'shims')
-    inputs.include = [shimsDir]
+    const cachedHandlerPath = await resolveCachedHandlerPath(inputs)
+    inputs.include.push(cachedHandlerPath)
     inputs.exclude.push('.git/**', '.gitignore', '.serverless', '.DS_Store')
 
-    inputs.handler = ensureString(inputs.handler, { default: DEFAULTS.handler })
+    inputs.handler = `${path.basename(cachedHandlerPath, '.js')}.handler`
     inputs.runtime = ensureString(inputs.runtime, { default: DEFAULTS.runtime })
     inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
 

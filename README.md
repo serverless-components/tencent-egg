@@ -12,19 +12,30 @@
 
 0. [准备](#0-准备)
 1. [安装](#1-安装)
-2. [配置](#2-配置)
-3. [部署](#3-部署)
-4. [移除](#4-移除)
-
+1. [配置](#2-配置)
+1. [部署](#3-部署)
+1. [移除](#4-移除)
 
 ### 0. 准备
 
 #### 初始化 Egg 项目
 
-```shell
+```bash
 $ mkdir egg-example && cd egg-example
 $ npm init egg --type=simple
 $ npm i
+```
+
+#### 新增初始化文件
+
+在项目根目录下新建文件 `sls.js`，内容如下：
+
+```js
+const { Application } = require('egg')
+
+const app = new Application()
+
+module.exports = app
 ```
 
 #### 修改 Egg 配置
@@ -32,20 +43,20 @@ $ npm i
 由于云函数在执行时，只有 `/tmp` 可读写的，所以我们需要将 `egg.js` 框架运行尝试的日志写到该目录下，为此需要修改 `config/config.default.js` 中的配置如下：
 
 ```js
-const config = exports = {
+const config = (exports = {
   env: 'prod', // 推荐云函数的 egg 运行环境变量修改为 prod
   rundir: '/tmp',
   logger: {
-    dir: '/tmp',
-  },
-};
+    dir: '/tmp'
+  }
+})
 ```
 
 ### 1. 安装
 
 通过 npm 全局安装 [serverless cli](https://github.com/serverless/serverless)
 
-```shell
+```bash
 $ npm install -g serverless
 ```
 
@@ -53,7 +64,7 @@ $ npm install -g serverless
 
 在项目根目录创建 `serverless.yml` 文件，在其中进行如下配置
 
-```shell
+```bash
 $ touch serverless.yml
 ```
 
@@ -61,9 +72,9 @@ $ touch serverless.yml
 # serverless.yml
 
 MyComponent:
-  component: "@serverless/tencent-egg"
+  component: '@serverless/tencent-egg'
   inputs:
-    region: ap-guangzhou 
+    region: ap-guangzhou
     functionName: egg-function
     code: ./
     functionConf:
@@ -88,7 +99,7 @@ MyComponent:
 
 通过 `sls` 命令进行部署，并可以添加 `--debug` 参数查看部署过程中的信息
 
-```shell
+```bash
 $ sls --debug
 ```
 
@@ -98,7 +109,7 @@ $ sls --debug
 
 通过以下命令移除部署的 API 网关
 
-```shell
+```bash
 $ sls remove --debug
 ```
 
@@ -106,7 +117,7 @@ $ sls remove --debug
 
 当前默认支持 CLI 扫描二维码登录，如您希望配置持久的环境变量/秘钥信息，也可以本地创建 `.env` 文件
 
-```shell
+```bash
 $ touch .env # 腾讯云的配置信息
 ```
 

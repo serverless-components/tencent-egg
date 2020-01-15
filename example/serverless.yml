@@ -1,5 +1,5 @@
 MyEgg:
-  component: '@serverless/tencent-egg'
+  component: ../
   inputs:
     region: ap-guangzhou
     functionName: egg-function
@@ -10,9 +10,6 @@ MyEgg:
       environment:
         variables:
           TEST: vale
-      vpcConfig:
-        subnetId: ''
-        vpcId: ''
     apigatewayConf:
       protocols:
         - https

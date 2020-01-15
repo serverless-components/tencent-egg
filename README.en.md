@@ -1,6 +1,5 @@
 [![Serverless Egg Tencent Cloud](https://img.serverlesscloud.cn/20191226/1577361751088-egg_width.png)](http://serverless.com)
 
-
 # Tencent Egg.js Serverless Component
 
 [简体中文](https://github.com/serverless-components/tencent-egg/blob/master/README.md) | English
@@ -13,19 +12,31 @@
 
 1. [Prepare](#0-prepare)
 1. [Install](#1-install)
-2. [Create](#2-create)
-3. [Configure](#3-configure)
-4. [Deploy](#4-deploy)
-5. [Remove](#5-Remove)
+1. [Create](#2-create)
+1. [Configure](#3-configure)
+1. [Deploy](#4-deploy)
+1. [Remove](#5-Remove)
 
 ### 0. Prepare
 
 #### Init Egg Project
 
-```shell
+```bash
 $ mkdir egg-example && cd egg-example
 $ npm init egg --type=simple
 $ npm i
+```
+
+#### Add init file
+
+Create `sls.js` file in project root, as below:
+
+```js
+const { Application } = require('egg')
+
+const app = new Application()
+
+module.exports = app
 ```
 
 #### Change Egg Config
@@ -33,20 +44,20 @@ $ npm i
 When cloud funtion executing, only `/tmp` folder is writable, so we need change the folder of logging for `egg.js`, then we change the configuration in `config/config.default.js` as below:
 
 ```js
-const config = exports = {
+const config = (exports = {
   env: 'prod', // prod is recommended
   rundir: '/tmp',
   logger: {
-    dir: '/tmp',
-  },
-};
+    dir: '/tmp'
+  }
+})
 ```
 
 ### 1. Install
 
 Install the Serverless Framework globally:
 
-```shell
+```bash
 $ npm install -g serverless
 ```
 
@@ -54,7 +65,7 @@ $ npm install -g serverless
 
 In project root, create the following simple boilerplate:
 
-```shell
+```bash
 $ touch serverless.yml
 $ touch .env           # your Tencent api keys
 ```
@@ -75,9 +86,9 @@ TENCENT_SECRET_KEY=XXX
 # serverless.yml
 
 MyComponent:
-  component: "@serverless/tencent-egg"
+  component: '@serverless/tencent-egg'
   inputs:
-    region: ap-guangzhou 
+    region: ap-guangzhou
     functionName: egg-function
     code: ./
     functionConf:
@@ -98,7 +109,7 @@ MyComponent:
 
 ### 4. Deploy
 
-```shell
+```bash
 $ sls --debug
 ```
 
@@ -108,7 +119,7 @@ $ sls --debug
 
 ### 5. Remove
 
-```shell
+```bash
 $ sls remove --debug
 ```
 
