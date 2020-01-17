@@ -52,6 +52,20 @@ const config = (exports = {
 })
 ```
 
+#### 注意!!!
+
+由于 `egg` 的 `egg-static` 静态资源插件是默认开启的，所以在启动应用时，会尝试创建 `app/public` 目录，但是云函数执行环境只有 `/tmp` 可读写，所以需要本地创建，并添加 `.gitkeep` 文件（为空就好）。
+
+但是如果你并不想使用静态资源，可以修改 `config/plugin.js` 来禁用它：
+
+```js
+module.exports = {
+  static: {
+    enable: false
+  }
+}
+```
+
 ### 1. 安装
 
 通过 npm 全局安装 [serverless cli](https://github.com/serverless/serverless)

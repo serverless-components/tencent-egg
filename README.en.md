@@ -53,6 +53,20 @@ const config = (exports = {
 })
 ```
 
+#### Notice!!!
+
+Because static assets plugin `egg-static` is `enabled` by default, when `egg` application starting, it will try to make directory `app/public`, but only `/tmp` is writable. So we need create `app/public` manualy, and add an empty file `.gitkeep` in it.
+
+If you don't want to use static assets feature, just modify `config/plugin.js` file to disable it:
+
+```js
+module.exports = {
+  static: {
+    enable: false
+  }
+}
+```
+
 ### 1. Install
 
 Install the Serverless Framework globally:
