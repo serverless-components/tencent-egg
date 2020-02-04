@@ -62,6 +62,7 @@ class TencentEgg extends Component {
     const tencentCloudFunction = await this.load('@serverless/tencent-scf')
     const tencentApiGateway = await this.load('@serverless/tencent-apigateway')
 
+    inputs.fromClientRemark = inputs.fromClientRemark || 'tencent-egg'
     const tencentCloudFunctionOutputs = await tencentCloudFunction(inputs)
     const apigwParam = {
       serviceName: inputs.serviceName,
@@ -92,6 +93,7 @@ class TencentEgg extends Component {
       apigwParam.endpoints[0].auth = inputs.apigatewayConf.auth
     }
 
+    apigwParam.fromClientRemark = inputs.fromClientRemark || 'tencent-egg'
     const tencentApiGatewayOutputs = await tencentApiGateway(apigwParam)
     const outputs = {
       region: inputs.region,
@@ -109,12 +111,15 @@ class TencentEgg extends Component {
     return outputs
   }
 
-  async remove() {
+  async remove(inputs = {}) {
+    const removeInput = {
+      fromClientRemark: inputs.fromClientRemark || 'tencent-egg'
+    }
     const tencentCloudFunction = await this.load('@serverless/tencent-scf')
     const tencentApiGateway = await this.load('@serverless/tencent-apigateway')
 
-    await tencentCloudFunction.remove()
-    await tencentApiGateway.remove()
+    await tencentCloudFunction.remove(removeInput)
+    await tencentApiGateway.removeremoveInput()
 
     return {}
   }
