@@ -119,7 +119,7 @@ class TencentEgg extends Component {
     const tencentApiGateway = await this.load('@serverless/tencent-apigateway')
 
     await tencentCloudFunction.remove(removeInput)
-    await tencentApiGateway.removeremoveInput()
+    await tencentApiGateway.remove(removeInput)
 
     return {}
   }
