@@ -23,7 +23,7 @@ egg:
         subnetId: ''
         vpcId: ''
     apigatewayConf:
-      protocol:
+      protocols:
         - http
         - https
       environment: test
