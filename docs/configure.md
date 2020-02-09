@@ -79,7 +79,7 @@ Main param description
 
 | Param       | Required/Optional | Description                                                                                              |
 | ----------- | :---------------: | :------------------------------------------------------------------------------------------------------- |
-| protocol    |     Optional      | Frontend request type of the service, such as HTTP, HTTPS, HTTP and HTTPS.                               |
+| protocols   |     Optional      | Frontend request type of the service, such as HTTP, HTTPS, HTTP and HTTPS.                               |
 | environment |     Optional      | The name of the environment to be published. Three environments are supported: test, prepub and release. |
 | usagePlan   |     Optional      |                                                                                                          |
 | auth        |     Optional      |                                                                                                          |
