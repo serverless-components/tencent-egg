@@ -33,14 +33,12 @@ class TencentEgg extends Component {
     inputs.include = ensureIterable(inputs.include, { default: [], ensureItem: ensureString })
     inputs.exclude = ensureIterable(inputs.exclude, { default: [], ensureItem: ensureString })
     inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
+    inputs.runtime = ensureString(inputs.runtime, { default: DEFAULTS.runtime })
 
     const cachedHandlerPath = await resolveCachedHandlerPath(inputs)
+    inputs.handler = `${path.basename(cachedHandlerPath, '.js')}.handler`
     inputs.include.push(cachedHandlerPath)
     inputs.exclude.push('.git/**', '.gitignore', '.serverless', '.DS_Store')
-
-    inputs.handler = `${path.basename(cachedHandlerPath, '.js')}.handler`
-    inputs.runtime = ensureString(inputs.runtime, { default: DEFAULTS.runtime })
-    inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
 
     if (inputs.functionConf) {
       inputs.timeout = inputs.functionConf.timeout ? inputs.functionConf.timeout : 3
@@ -83,7 +81,8 @@ class TencentEgg extends Component {
             functionName: tencentCloudFunctionOutputs.Name
           }
         }
-      ]
+      ],
+      customDomain: inputs.apigatewayConf.customDomain
     }
 
     if (inputs.apigatewayConf && inputs.apigatewayConf.auth) {
@@ -102,6 +101,9 @@ class TencentEgg extends Component {
       url: `${this.getDefaultProtocol(tencentApiGatewayOutputs.protocols)}://${
         tencentApiGatewayOutputs.subDomain
       }/${tencentApiGatewayOutputs.environment}/`
+    }
+    if (tencentApiGatewayOutputs.customDomains) {
+      outputs.customDomains = tencentApiGatewayOutputs.customDomains
     }
 
     this.state = outputs
