@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/serverless-components/tencent-egg/compare/v0.2.0...v0.2.1) (2020-02-18)
+
+
+### Bug Fixes
+
+* apigw remove bug ([abf17a0](https://github.com/serverless-components/tencent-egg/commit/abf17a05eba5265e247cade44be643689cbfb48d))
+
 ## [0.2.0](https://github.com/serverless-components/tencent-egg/compare/v0.1.10...v0.2.0) (2020-02-18)
 
 
