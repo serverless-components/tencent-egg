@@ -36,7 +36,7 @@
       "git add ."
     ],
     "**/*.{css,html,js,json,md,yaml,yml}": [
-      "prettier -c",
+      "npm run prettier:fix",
       "git add ."
     ]
   },
