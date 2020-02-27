@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/serverless-components/tencent-egg/compare/v0.2.1...v0.2.2) (2020-02-27)
+
+
+### Bug Fixes
+
+* upgrade tencent-scf for upload bar ([b4f1a15](https://github.com/serverless-components/tencent-egg/commit/b4f1a158779d45a96560237720c955060c4cfa10))
+
 ### [0.2.1](https://github.com/serverless-components/tencent-egg/compare/v0.2.0...v0.2.1) (2020-02-18)
 
 
