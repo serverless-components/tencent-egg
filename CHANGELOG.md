@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/serverless-components/tencent-egg/compare/v0.2.2...v0.2.3) (2020-02-27)
+
+
+### Bug Fixes
+
+* support static assets reture ([c385bd3](https://github.com/serverless-components/tencent-egg/commit/c385bd3c8eb15479fca58a2ddf80db304f62cf7e))
+
 ### [0.2.2](https://github.com/serverless-components/tencent-egg/compare/v0.2.1...v0.2.2) (2020-02-27)
 
 
