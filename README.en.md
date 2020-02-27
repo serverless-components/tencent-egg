@@ -34,7 +34,9 @@ Create `sls.js` file in project root, as below:
 ```js
 const { Application } = require('egg')
 
-const app = new Application()
+const app = new Application({
+  env: 'prod'
+})
 
 module.exports = app
 ```
