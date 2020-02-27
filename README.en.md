@@ -2,6 +2,9 @@
 
 # Tencent Egg.js Serverless Component
 
+[![npm](https://img.shields.io/npm/v/%40serverless%2Ftencent-egg)](http://www.npmtrends.com/%40serverless%2Ftencent-egg)
+[![NPM downloads](http://img.shields.io/npm/dm/%40serverless%2Ftencent-egg.svg?style=flat-square)](http://www.npmtrends.com/%40serverless%2Ftencent-egg)
+
 [简体中文](https://github.com/serverless-components/tencent-egg/blob/master/README.md) | English
 
 ## Introduction
