@@ -6,7 +6,7 @@
 
 ## Introduction
 
-[Egg.js](https://github.com/eggjs/egg) Serverless Component for Tencent Cloud, support Restful API deploy.
+[Egg.js](https://github.com/eggjs/egg) Serverless Component for Tencent Cloud.
 
 ## Content
 
@@ -68,6 +68,25 @@ module.exports = {
   }
 }
 ```
+
+If need to enable `egg-static`, and public folder exists and there are static assets.
+You should config `bainaryTypes` in `sls.js`, as below:
+
+```js
+const { Application } = require('egg')
+
+const app = new Application({
+  env: 'prod'
+})
+
+// You can change this config by yourself.
+// For example, your egg enable gzip, we should make all file to binary, so change to `app.binaryTypes = ['*/*']`
+app.binaryTypes = ['image/*']
+
+module.exports = app
+```
+
+Reter to: [example](https://github.com/serverless-components/tencent-egg/blob/master/example/sls.js)
 
 ### 1. Install
 

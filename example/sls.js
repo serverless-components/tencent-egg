@@ -1,7 +1,9 @@
 const { Application } = require('egg')
 
 const app = new Application({
-  env: 'prod',
+  env: 'prod'
 })
 
-module.exports = app;
+app.binaryTypes = ['image/*']
+
+module.exports = app

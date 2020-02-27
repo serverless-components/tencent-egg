@@ -6,7 +6,7 @@
 
 ## 简介
 
-腾讯云 [Egg.js](https://github.com/eggjs/egg) Serverless Component, 支持 Restful API 服务的部署。
+腾讯云 [Egg.js](https://github.com/eggjs/egg) Serverless Component。
 
 ## 目录
 
@@ -67,6 +67,25 @@ module.exports = {
   }
 }
 ```
+
+如果需要开启静态资源功能，并且 public 已经存在，且里面包含静态资源。
+此时需要配置 `binaryTypes`，修改 `sls.js` 文件如下：
+
+```js
+const { Application } = require('egg')
+
+const app = new Application({
+  env: 'prod'
+})
+
+// 这里可以根据实际情况来配置
+// 如果你的站点开启gzip，那么所有返回类型都应该是二进制类型，所以应该是 `app.binaryTypes = ['*/*']`
+app.binaryTypes = ['image/*']
+
+module.exports = app
+```
+
+参考：[example](https://github.com/serverless-components/tencent-egg/blob/master/example/sls.js)
 
 ### 1. 安装
 
