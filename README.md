@@ -176,6 +176,6 @@ TENCENT_SECRET_KEY=123
 
 可以在 [Serverless Components](https://github.com/serverless/components) repo 中查询更多组件的信息。
 
-### FAQ
+### 常见问题解答
 
 1. [部署时一直处于打包压缩阶段](https://github.com/serverless-components/tencent-egg/issues/5)
