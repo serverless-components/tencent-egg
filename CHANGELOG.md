@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/serverless-components/tencent-egg/compare/v0.2.3...v0.2.4) (2020-03-03)
+
+
+### Bug Fixes
+
+* remove add sls.js step ([ddc5ecc](https://github.com/serverless-components/tencent-egg/commit/ddc5eccf0719c83cfb0b28225d73ca6973cb36f3))
+
 ### [0.2.3](https://github.com/serverless-components/tencent-egg/compare/v0.2.2...v0.2.3) (2020-02-27)
 
 
