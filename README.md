@@ -179,3 +179,7 @@ TENCENT_SECRET_KEY=123
 ### 常见问题解答
 
 1. [部署时一直处于打包压缩阶段](https://github.com/serverless-components/tencent-egg/issues/5)
+
+### FAQ
+
+1. [为什么不需要入口文件了？](https://github.com/serverless-components/tencent-egg/issues/1)
