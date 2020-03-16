@@ -87,13 +87,13 @@ Main param description
 
 ### apigatewayConf param description
 
-| Param       | Required/Optional | Description                                                                                              |
-| ----------- | :---------------: | :------------------------------------------------------------------------------------------------------- |
-| protocols   |     Optional      | Frontend request type of the service, such as HTTP, HTTPS, HTTP and HTTPS.                               |
-| environment |     Optional      | The name of the environment to be published. Three environments are supported: test, prepub and release. |
-| usagePlan   |     Optional      |                                                                                                          |
-| auth        |     Optional      |                                                                                                          |
-| customDomain  |     Optional      |       Custom API Domain                                         |
+| Param        | Required/Optional | Description                                                                                              |
+| ------------ | :---------------: | :------------------------------------------------------------------------------------------------------- |
+| protocols    |     Optional      | Frontend request type of the service, such as HTTP, HTTPS, HTTP and HTTPS.                               |
+| environment  |     Optional      | The name of the environment to be published. Three environments are supported: test, prepub and release. |
+| usagePlan    |     Optional      |                                                                                                          |
+| auth         |     Optional      |                                                                                                          |
+| customDomain |     Optional      | Custom API Domain                                                                                        |
 
 - usagePlan param description
 
@@ -128,4 +128,3 @@ Main param description
 | ----------- | :---------------------------- |
 | path        | Customize mapping path        |
 | environment | Customize mapping environment |
-

@@ -46,15 +46,11 @@
     }
   },
   "dependencies": {
-    "@serverless/core": "^1.1.1",
-    "@serverless/tencent-apigateway": "^2.1.4",
-    "@serverless/tencent-scf": "^3.0.0",
-    "ext": "^1.4.0",
-    "fs-extra": "^8.1.0",
+    "@serverless/core": "^1.1.2",
+    "@serverless/tencent-framework": "^0.0.2",
+    "@ygkit/bundler": "^0.0.4",
     "tencent-serverless-http": "^1.0.5",
-    "terser": "^4.6.3",
-    "type": "^2.0.0",
-    "webmake": "^1.1.0"
+    "type": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",

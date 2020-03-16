@@ -30,20 +30,6 @@ $ npm init egg --type=simple
 $ npm i
 ```
 
-#### Add init file
-
-Create `sls.js` file in project root, as below:
-
-```js
-const { Application } = require('egg')
-
-const app = new Application({
-  env: 'prod'
-})
-
-module.exports = app
-```
-
 #### Change Egg Config
 
 When cloud funtion executing, only `/tmp` folder is writable, so we need change the folder of logging for `egg.js`, then we change the configuration in `config/config.default.js` as below:
@@ -57,39 +43,6 @@ const config = (exports = {
   }
 })
 ```
-
-#### Notice!!!
-
-Because static assets plugin `egg-static` is `enabled` by default, when `egg` application starting, it will try to make directory `app/public`, but only `/tmp` is writable. So we need create `app/public` manualy, and add an empty file `.gitkeep` in it.
-
-If you don't want to use static assets feature, just modify `config/plugin.js` file to disable it:
-
-```js
-module.exports = {
-  static: {
-    enable: false
-  }
-}
-```
-
-If need to enable `egg-static`, and public folder exists and there are static assets.
-You should config `bainaryTypes` in `sls.js`, as below:
-
-```js
-const { Application } = require('egg')
-
-const app = new Application({
-  env: 'prod'
-})
-
-// You can change this config by yourself.
-// For example, your egg enable gzip, we should make all file to binary, so change to `app.binaryTypes = ['*/*']`
-app.binaryTypes = ['image/*']
-
-module.exports = app
-```
-
-Reter to: [example](https://github.com/serverless-components/tencent-egg/blob/master/example/sls.js)
 
 ### 1. Install
 
@@ -150,6 +103,53 @@ MyComponent:
 
 ```bash
 $ sls --debug
+
+  DEBUG ─ Resolving the template's static variables.
+  DEBUG ─ Collecting components from the template.
+  DEBUG ─ Downloading any NPM components found in the template.
+  DEBUG ─ Analyzing the template's components dependencies.
+  DEBUG ─ Creating the template's components graph.
+  DEBUG ─ Syncing template state.
+  DEBUG ─ Executing the template's components graph.
+  DEBUG ─ Compressing function egg-function file to /Users/yugasun/Desktop/Develop/serverless/tencent-egg/example/.serverless/egg-function.zip.
+  DEBUG ─ Compressed function egg-function file successful
+  DEBUG ─ Uploading service package to cos[sls-cloudfunction-ap-guangzhou-code]. sls-cloudfunction-default-egg-function-1584348537.zip
+  DEBUG ─ Uploaded package successful /Users/yugasun/Desktop/Develop/serverless/tencent-egg/example/.serverless/egg-function.zip
+  DEBUG ─ Creating function egg-function
+  egg-function [████████████████████████████████████████] 100% | ETA: 0s | Speed: 4422.09k/s
+  DEBUG ─ Updating code...
+  DEBUG ─ Updating configure...
+  DEBUG ─ Created function egg-function successful
+  DEBUG ─ Setting tags for function egg-function
+  DEBUG ─ Creating trigger for function egg-function
+  DEBUG ─ Deployed function egg-function successful
+  DEBUG ─ Starting API-Gateway deployment with name ap-guangzhou-apigateway in the ap-guangzhou region
+  DEBUG ─ Using last time deploy service id service-jkcevoqw
+  DEBUG ─ Updating service with serviceId service-jkcevoqw.
+  DEBUG ─ Endpoint ANY / already exists with id api-et0yjwci.
+  DEBUG ─ Updating api with api id api-et0yjwci.
+  DEBUG ─ Service with id api-et0yjwci updated.
+  DEBUG ─ Deploying service with id service-jkcevoqw.
+  DEBUG ─ Deployment successful for the api named ap-guangzhou-apigateway in the ap-guangzhou region.
+
+  MyEgg:
+    functionName:        egg-function
+    functionOutputs:
+      ap-guangzhou:
+        Name:        egg-function
+        Runtime:     Nodejs8.9
+        Handler:     serverless-handler.handler
+        MemorySize:  128
+        Timeout:     10
+        Region:      ap-guangzhou
+        Namespace:   default
+        Description: This is a template function
+    region:              ap-guangzhou
+    apiGatewayServiceId: service-jkcevoqw
+    url:                 https://service-jkcevoqw-1251556596.gz.apigw.tencentcs.com/release/
+    cns:                 (empty array)
+
+  23s › MyEgg › done
 ```
 
 > Notice: `sls` is short for `serverless` command.
@@ -160,6 +160,13 @@ $ sls --debug
 
 ```bash
 $ sls remove --debug
+
+  DEBUG ─ Flushing template state and removing all components.
+  DEBUG ─ Removed function egg-function successful
+  DEBUG ─ Removing any previously deployed API. api-et0yjwci
+  DEBUG ─ Removing any previously deployed service. service-jkcevoqw
+
+  10s › MyEgg › done
 ```
 
 ### More Components

@@ -1,132 +1,64 @@
+const os = require('os')
 const ensureIterable = require('type/iterable/ensure')
-const ensurePlainObject = require('type/plain-object/ensure')
 const ensureString = require('type/string/ensure')
-const random = require('ext/string/random')
 const path = require('path')
+const fs = require('fs')
 const { Component } = require('@serverless/core')
-const resolveCachedHandlerPath = require('./shims/lib/resolve-cached-handler-path')
+const { bundler } = require('@ygkit/bundler')
+const pkg = require('../package.json')
 
 const DEFAULTS = {
-  runtime: 'Nodejs8.9',
-  exclude: ['.git/**', '.gitignore', '.serverless', '.DS_Store', 'run', 'logs']
+  runtime: 'Nodejs8.9'
 }
 
-class TencentEgg extends Component {
-  getDefaultProtocol(protocols) {
-    if (protocols.map((i) => i.toLowerCase()).includes('https')) {
-      return 'https'
-    }
-    return 'http'
-  }
+const framework = 'egg'
 
-  /**
-   * prepare create function inputs
-   * @param {object} inputs inputs
-   */
-  async prepareInputs(inputs = {}) {
-    inputs.name =
-      ensureString(inputs.functionName, { isOptional: true }) ||
-      this.state.functionName ||
-      `EggComponent_${random({ length: 6 })}`
-    inputs.codeUri = ensureString(inputs.code, { isOptional: true }) || process.cwd()
-    inputs.region = ensureString(inputs.region, { default: 'ap-guangzhou' })
-    inputs.namespace = ensureString(inputs.namespace, { default: 'default' })
-    inputs.include = ensureIterable(inputs.include, { default: [], ensureItem: ensureString })
-    inputs.exclude = ensureIterable(inputs.exclude, { default: [], ensureItem: ensureString })
-    inputs.apigatewayConf = ensurePlainObject(inputs.apigatewayConf, { default: {} })
-    inputs.runtime = ensureString(inputs.runtime, { default: DEFAULTS.runtime })
-
-    const cachedHandlerPath = await resolveCachedHandlerPath(inputs)
-    inputs.handler = `${path.basename(cachedHandlerPath, '.js')}.handler`
-    inputs.include.push(cachedHandlerPath)
-    inputs.exclude.push('.git/**', '.gitignore', '.serverless', '.DS_Store')
-
-    if (inputs.functionConf) {
-      inputs.timeout = inputs.functionConf.timeout ? inputs.functionConf.timeout : 3
-      inputs.memorySize = inputs.functionConf.memorySize ? inputs.functionConf.memorySize : 128
-      if (inputs.functionConf.environment) {
-        inputs.environment = inputs.functionConf.environment
-      }
-      if (inputs.functionConf.vpcConfig) {
-        inputs.vpcConfig = inputs.functionConf.vpcConfig
-      }
-    }
-
-    return inputs
-  }
-
+class TencentComponent extends Component {
   async default(inputs = {}) {
-    inputs = await this.prepareInputs(inputs)
+    inputs.include = ensureIterable(inputs.include, { default: [], ensureItem: ensureString })
+    inputs.runtime = DEFAULTS.runtime
 
-    const tencentCloudFunction = await this.load('@serverless/tencent-scf')
-    const tencentApiGateway = await this.load('@serverless/tencent-apigateway')
+    const cachePath = path.join(
+      os.homedir(),
+      `.serverless/cache/tencent-${framework}`,
+      pkg.version,
+      'serverless-handler.js'
+    )
 
-    inputs.fromClientRemark = inputs.fromClientRemark || 'tencent-egg'
-    const tencentCloudFunctionOutputs = await tencentCloudFunction(inputs)
-    const apigwParam = {
-      serviceName: inputs.serviceName,
-      description: 'Serverless Framework tencent-egg Component',
-      serviceId: inputs.serviceId,
-      region: inputs.region,
-      protocols: inputs.apigatewayConf.protocols || ['http'],
-      environment:
-        inputs.apigatewayConf && inputs.apigatewayConf.environment
-          ? inputs.apigatewayConf.environment
-          : 'release',
-      endpoints: [
-        {
-          path: '/',
-          method: 'ANY',
-          function: {
-            isIntegratedResponse: true,
-            functionName: tencentCloudFunctionOutputs.Name,
-            functionNamespace: inputs.namespace
-          }
-        }
-      ],
-      customDomain: inputs.apigatewayConf.customDomain
+    if (!fs.existsSync(cachePath)) {
+      this.context.debug('Generating serverless handler...')
+
+      await bundler({
+        input: path.join(__dirname, 'shims/handler.js'),
+        output: cachePath
+      })
+      this.context.debug('Generated serverless handler successfully.')
     }
 
-    if (inputs.apigatewayConf && inputs.apigatewayConf.auth) {
-      apigwParam.endpoints[0].usagePlan = inputs.apigatewayConf.usagePlan
-    }
-    if (inputs.apigatewayConf && inputs.apigatewayConf.auth) {
-      apigwParam.endpoints[0].auth = inputs.apigatewayConf.auth
-    }
+    inputs.handler = `${path.basename(cachePath, '.js')}.handler`
+    inputs.include.push(cachePath)
 
-    apigwParam.fromClientRemark = inputs.fromClientRemark || 'tencent-egg'
-    const tencentApiGatewayOutputs = await tencentApiGateway(apigwParam)
-    const outputs = {
-      region: inputs.region,
-      functionName: inputs.name,
-      apiGatewayServiceId: tencentApiGatewayOutputs.serviceId,
-      url: `${this.getDefaultProtocol(tencentApiGatewayOutputs.protocols)}://${
-        tencentApiGatewayOutputs.subDomain
-      }/${tencentApiGatewayOutputs.environment}/`
-    }
-    if (tencentApiGatewayOutputs.customDomains) {
-      outputs.customDomains = tencentApiGatewayOutputs.customDomains
-    }
+    const Framework = await this.load('@serverless/tencent-framework')
 
-    this.state = outputs
+    const framworkOutpus = await Framework({
+      ...inputs,
+      ...{
+        framework
+      }
+    })
 
+    this.state = framworkOutpus
     await this.save()
-
-    return outputs
+    return framworkOutpus
   }
 
   async remove(inputs = {}) {
-    const removeInput = {
-      fromClientRemark: inputs.fromClientRemark || 'tencent-egg'
-    }
-    const tencentCloudFunction = await this.load('@serverless/tencent-scf')
-    const tencentApiGateway = await this.load('@serverless/tencent-apigateway')
-
-    await tencentCloudFunction.remove(removeInput)
-    await tencentApiGateway.remove(removeInput)
-
+    const Framework = await this.load('@serverless/tencent-framework')
+    await Framework.remove(inputs)
+    this.state = {}
+    await this.save()
     return {}
   }
 }
 
-module.exports = TencentEgg
+module.exports = TencentComponent
