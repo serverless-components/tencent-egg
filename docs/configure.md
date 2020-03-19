@@ -11,8 +11,9 @@ egg:
     region: ap-guangzhou
     functionName: egg-function
     serviceName: mytest
+    runtime: Nodejs8.9
     serviceId: service-np1uloxw
-    code: ./
+    code: ./code
     functionConf:
       timeout: 10
       memorySize: 128
@@ -46,7 +47,7 @@ egg:
         serviceTimeout: 15
         secretName: secret
         secretIds:
-          - abc
+          - xxx
 ```
 
 ## Configuration description
@@ -56,6 +57,7 @@ Main param description
 | Param                                               | Required/Optional |   Default    | Description                                                          |
 | --------------------------------------------------- | :---------------: | :----------: | :------------------------------------------------------------------- |
 | region                                              |     Optional      | ap-guangzhou |                                                                      |
+| runtime                                             |     Optional      |  Nodejs8.9   | Nodejs Runtime, support: Nodejs6.10, Nodejs8.9, Nodejs10.15          |
 | functionName                                        |     Optional      |              | ServerlessCloudFunction Name                                         |
 | serviceName                                         |     Optional      |              | API-Gateway service name, default to create a new serivce            |
 | serviceId                                           |     Optional      |              | API-Gateway service id, if it has will use this APII-Gateway service |
@@ -89,7 +91,8 @@ Main param description
 
 | Param        | Required/Optional | Description                                                                                              |
 | ------------ | :---------------: | :------------------------------------------------------------------------------------------------------- |
-| protocols    |     Optional      | Frontend request type of the service, such as HTTP, HTTPS, HTTP and HTTPS.                               |
+| isDisabled   |     Optional      | Whether disable auto creating api gateway, if you don't want to create it, set to `true`                 |
+| protocols    |     Optional      | Frontend request type of the service, such as `http` or `https`.                                         |
 | environment  |     Optional      | The name of the environment to be published. Three environments are supported: test, prepub and release. |
 | usagePlan    |     Optional      |                                                                                                          |
 | auth         |     Optional      |                                                                                                          |
