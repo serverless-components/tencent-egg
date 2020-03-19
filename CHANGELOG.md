@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/serverless-components/tencent-egg/compare/v1.0.0...v1.0.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* remove unuse file ([2db1c9b](https://github.com/serverless-components/tencent-egg/commit/2db1c9bd74eb978295319077b1f7722db680f2b5))
+* support customize runtime ([7a26bd8](https://github.com/serverless-components/tencent-egg/commit/7a26bd84369d89ec3fe72b8d6c100d45220abb41))
+
 ## [1.0.0](https://github.com/serverless-components/tencent-egg/compare/v0.2.6...v1.0.0) (2020-03-16)
 
 
