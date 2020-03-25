@@ -169,6 +169,10 @@ $ sls remove --debug
   10s › MyEgg › done
 ```
 
+### Notice!!!
+
+After egg project initialed, it will create `app/public` directory automatically. But when deploying, because it is empty, so this directory will not be uploaded. So when egg application start up, it will try to create `app/public` directory, but it can not write to it. So please create empty file `.gitkeep` in `app/public` directory.
+
 ### More Components
 
 Checkout the [Serverless Components](https://github.com/serverless/components) repo for more information.
