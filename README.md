@@ -29,20 +29,6 @@ $ npm init egg --type=simple
 $ npm i
 ```
 
-#### 新增初始化文件
-
-在项目根目录下新建文件 `sls.js`，内容如下：
-
-```js
-const { Application } = require('egg')
-
-const app = new Application({
-  env: 'prod'
-})
-
-module.exports = app
-```
-
 #### 修改 Egg 配置
 
 由于云函数在执行时，只有 `/tmp` 可读写的，所以我们需要将 `egg.js` 框架运行尝试的日志写到该目录下，为此需要修改 `config/config.default.js` 中的配置如下：
