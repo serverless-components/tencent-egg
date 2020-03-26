@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/serverless-components/tencent-egg/compare/v1.0.2...v1.0.3) (2020-03-26)
+
+
+### Bug Fixes
+
+* make runtime default Nodejs10.15 ([c46d017](https://github.com/serverless-components/tencent-egg/commit/c46d017a53aceba2b313b8577d4786cd16b46e56))
+
 ### [1.0.2](https://github.com/serverless-components/tencent-egg/compare/v1.0.1...v1.0.2) (2020-03-26)
 
 
