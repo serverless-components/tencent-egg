@@ -67,6 +67,7 @@ MyComponent:
   inputs:
     region: ap-guangzhou
     functionName: egg-function
+    runtime: Nodejs8.9
     code: ./
     functionConf:
       timeout: 10
