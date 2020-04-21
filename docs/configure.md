@@ -5,70 +5,53 @@
 ```yml
 # serverless.yml
 
-egg:
-  component: '@serverless/tencent-egg'
-  inputs:
-    region: ap-guangzhou
-    runtime: Nodejs8.9
-    functionName: egg-function
-    serviceName: mytest
-    serviceId: service-np1uloxw
-    code: ./
-    exclude:
-      - .gitignore
-      - .git/**
-      - node_modules/**
-      - .serverless
-      - .env
-    include:
-      - ./myFunction1.zip
-    functionConf:
-      timeout: 10
-      memorySize: 128
-      environment:
-        variables:
-          TEST: vale
-      vpcConfig:
-        subnetId: ''
-        vpcId: ''
-    apigatewayConf:
-      customDomain:
-        - domain: abc.com
-          certificateId: abcdefg
-          isDefaultMapping: 'FALSE'
-          pathMappingSet:
-            - path: /
-              environment: release
-          protocols:
-            - http
-            - https
-      protocols:
-        - http
-        - https
-      environment: test
-      usagePlan:
-        usagePlanId: 1111
-        usagePlanName: slscmp
-        usagePlanDesc: sls create
-        maxRequestNum: 1000
-      auth:
-        serviceTimeout: 15
-        secretName: secret
-        secretIds:
-          - abc
-    cloudDNSConf:
-      ttl: 603
-      status: enable
-    ap-guangzhou:
-      functionConf:
-        timeout: 20
-      apigatewayConf:
+component: egg # (required) name of the component. In that case, it's express.
+name: eggDemo # (required) name of your express component instance.
+org: orgDemo # (optional) serverless dashboard org. default is the first org you created during signup.
+app: appDemo # (optional) serverless dashboard app. default is the same as the name property.
+stage: dev # (optional) serverless dashboard stage. default is dev.
+
+inputs:
+  region: ap-guangzhou
+  functionName: eggDemo
+  serviceName: mytest
+  runtime: Nodejs8.9
+  serviceId: service-np1uloxw
+  src: ./src
+  functionConf:
+    timeout: 10
+    memorySize: 128
+    environment:
+      variables:
+        TEST: vale
+    vpcConfig:
+      subnetId: ''
+      vpcId: ''
+  apigatewayConf:
+    customDomains:
+      - domain: abc.com
+        certificateId: abcdefg
+        isDefaultMapping: 'FALSE'
+        pathMappingSet:
+          - path: /
+            environment: release
         protocols:
+          - http
           - https
-      cloudDNSConf:
-        recordLine:
-          - 电信
-          - 联通
+    protocols:
+      - http
+      - https
+    environment: test
+    usagePlan:
+      usagePlanId: 1111
+      usagePlanName: slscmp
+      usagePlanDesc: sls create
+      maxRequestNum: 1000
+    auth:
+      serviceTimeout: 15
+      secretName: secret
+      secretIds:
+        - xxx
 ```
 
 ## Configuration description
@@ -77,12 +60,12 @@ Main param description
 
 | Param                                    | Required |     Default     | Description                                                                                 |
 | ---------------------------------------- | :------: | :-------------: | :------------------------------------------------------------------------------------------ |
-| runtime                                  |    N     |    Nodejs8.9    | Function Runtime, support: Nodejs6.10, Nodejs8.9, Nodejs10.15                               |
-| region                                   |    N     |  ap-guangzhou   | Deploy region                                                                               |
+| runtime                                  |    N     |  `Nodejs10.15`  | Function Runtime, support: Nodejs6.10, Nodejs8.9, Nodejs10.15                               |
+| region                                   |    N     | `ap-guangzhou`  | Deploy region                                                                               |
 | functionName                             |    N     |                 | Serverless Cloud Function Name                                                              |
 | serviceName                              |    N     |                 | API-Gateway service name, default to create a new serivce                                   |
 | serviceId                                |    N     |                 | API-Gateway service id, if it has will use this APII-Gateway service                        |
-| code                                     |    N     | `process.cwd()` | Default is current working directory, if it is object, refer to [code object](#code-object) |
+| src                                      |    N     | `process.cwd()` | Default is current working directory, if it is object, refer to [code object](#code-object) |
 | exclude                                  |    N     |                 | exclude file                                                                                |
 | include                                  |    N     |                 | include file, if relative path, should relative to `serverless.yml`                         |
 | [functionConf](#funtionConf)             |    N     |                 | Function configure                                                                          |
@@ -92,10 +75,10 @@ Main param description
 
 ## code object
 
-| Param  | Required |  Type  | Default | Description |
-| ------ | :------: | :----: | :-----: | :---------- |
-| bucket |    N     | String |         | bucket name |
-| key    |    N     | String |         | bucket key  |
+| Param  | Required |  Type  | Default | Description        |
+| ------ | :------: | :----: | :-----: | :----------------- |
+| bucket |    N     | String |         | bucket name        |
+| object |    N     | String |         | bucket object name |
 
 ### cloudDNSConf
 

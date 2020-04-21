@@ -36,14 +36,14 @@ module.exports = {
     'id-length': [
       'error',
       {
-        min: 2,
+        min: 1,
         max: 50,
         properties: 'never',
         exceptions: ['e', 'i', 'n', 't', 'x', 'y', 'z', '_', '$']
       }
     ],
     'no-alert': 'error',
-    'no-console': 'error',
+    'no-console': 'off',
     'no-const-assign': 'error',
     'no-else-return': 'error',
     'no-empty': 'off',

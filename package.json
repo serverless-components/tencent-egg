@@ -1,38 +1,31 @@
 {
-  "name": "@serverless/tencent-egg",
-  "description": "Tencent Cloud Egg.js Serverless Component",
-  "version": "1.0.5",
-  "main": "serverless.js",
+  "name": "@serverless/egg",
+  "version": "0.0.1",
+  "main": "src/serverless.js",
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "egg.js",
-    "serverless",
-    "serverless-component",
-    "serverlesscomponent",
-    "tencent"
-  ],
   "scripts": {
+    "test": "npm run lint && npm run prettier",
     "commitlint": "commitlint -f HEAD@{15}",
-    "test": "tape *.test.js",
     "lint": "eslint --ext .js,.ts,.tsx .",
     "lint:fix": "eslint --fix --ext .js,.ts,.tsx .",
     "prettier": "prettier --check **/*.{css,html,js,json,md,yaml,yml}",
     "prettier:fix": "prettier --write **/*.{css,html,js,json,md,yaml,yml}",
-    "release": "standard-version"
+    "release": "semantic-release",
+    "release-local": "node -r dotenv/config node_modules/semantic-release/bin/semantic-release --no-ci --dry-run",
+    "check-dependencies": "npx npm-check --skip-unused --update"
   },
-  "author": "Tencent Cloud, Inc.",
-  "license": "Apache-2.0",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-push": "npm run lint:fix && npm run prettier:fix"
     }
   },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
-      "eslint --fix --ext .js,.ts,.tsx .",
+      "npm run lint:fix",
       "git add ."
     ],
     "**/*.{css,html,js,json,md,yaml,yml}": [
@@ -40,41 +33,26 @@
       "git add ."
     ]
   },
-  "standard-version": {
-    "skip": {
-      "tag": false
-    }
-  },
-  "dependencies": {
-    "@serverless/core": "^1.1.2",
-    "@serverless/tencent-framework": "^0.1.1",
-    "@ygkit/bundler": "^0.0.5",
-    "tencent-serverless-http": "^1.0.7",
-    "type": "^2.0.0"
-  },
+  "author": "Tencent Cloud, Inc.",
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "babel-eslint": "9.0.0",
-    "eslint": "5.6.0",
-    "eslint-config-prettier": "^3.6.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
-    "prettier": "^1.15.3",
-    "standard-version": "^7.0.1"
-  },
-  "directories": {
-    "doc": "docs",
-    "example": "example"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/serverless-components/tencent-egg.git"
-  },
-  "bugs": {
-    "url": "https://github.com/serverless-components/tencent-egg/issues"
-  },
-  "homepage": "https://github.com/serverless-components/tencent-egg#readme"
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^5.0.0",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/npm": "^7.0.4",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1",
+    "semantic-release": "^17.0.4"
+  }
 }

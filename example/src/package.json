@@ -15,9 +15,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "ci": "npm run lint && npm run cov",
-    "deploy": "scf deploy -f",
-    "dev": "scf native invoke --template template.yaml --event event.json"
+    "ci": "npm run lint && npm run cov"
   },
   "ci": {
     "version": "10"

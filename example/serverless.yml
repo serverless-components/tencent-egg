@@ -1,17 +1,16 @@
-MyEgg:
-  component: '@serverless/tencent-egg'
-  inputs:
-    region: ap-guangzhou
-    functionName: egg-function
-    runtime: Nodejs8.9
-    code: ./
-    functionConf:
-      timeout: 10
-      memorySize: 128
-      environment:
-        variables:
-          TEST: vale
-    apigatewayConf:
-      protocols:
-        - https
-      environment: release
+org: orgDemo
+app: appDemo
+stage: dev
+component: egg
+name: eggDemo
+
+inputs:
+  # src: ./src
+  region: ap-guangzhou
+  functionName: eggDemo
+  runtime: Nodejs10.15
+  apigatewayConf:
+    protocols:
+      - http
+      - https
+    environment: release

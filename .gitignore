@@ -19,4 +19,5 @@ build/
 .env*
 env.js
 package-lock.json
+test
 yarn.lock
