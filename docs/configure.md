@@ -77,8 +77,8 @@ Main param description
 
 | Param                                    | Required |     Default     | Description                                                                                 |
 | ---------------------------------------- | :------: | :-------------: | :------------------------------------------------------------------------------------------ |
-| runtime                                  |    N     |    Nodejs8.9    | Function Runtime, support: Nodejs6.10, Nodejs8.9, Nodejs10.15                               |
-| region                                   |    N     |  ap-guangzhou   | Deploy region                                                                               |
+| runtime                                  |    N     |   `Nodejs8.9`   | Function Runtime, support: Nodejs6.10, Nodejs8.9, Nodejs10.15                               |
+| region                                   |    N     | `ap-guangzhou`  | Deploy region                                                                               |
 | functionName                             |    N     |                 | Serverless Cloud Function Name                                                              |
 | serviceName                              |    N     |                 | API-Gateway service name, default to create a new serivce                                   |
 | serviceId                                |    N     |                 | API-Gateway service id, if it has will use this APII-Gateway service                        |
