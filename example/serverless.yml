@@ -5,9 +5,8 @@ component: egg
 name: eggDemo
 
 inputs:
-  # src: ./src
+  src: ./src
   region: ap-guangzhou
-  functionName: eggDemo
   runtime: Nodejs10.15
   apigatewayConf:
     protocols:
