@@ -3,6 +3,8 @@ const fs = require('fs')
 const { createServer, proxy } = require('tencent-serverless-http')
 let app = require('./sls')
 
+let server
+
 module.exports.handler = async (event, context) => {
   const userSls = path.join(__dirname, '..', 'sls.js')
   if (fs.existsSync(userSls)) {
@@ -11,10 +13,12 @@ module.exports.handler = async (event, context) => {
     app = require(userSls)
   }
 
-  //
+  if (!server) {
+    server = createServer(app.callback(), null, app.binaryTypes || [])
+  }
+
   context.callbackWaitsForEmptyEventLoop =
     app.callbackWaitsForEmptyEventLoop === false ? false : true
 
-  const server = createServer(app.callback(), null, app.binaryTypes || [])
   return proxy(server, event, context, 'PROMISE').promise
 }
