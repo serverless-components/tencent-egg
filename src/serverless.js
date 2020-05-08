@@ -3,7 +3,7 @@ const { MultiApigw, Scf, Apigw, Cos, Cns } = require('tencent-component-toolkit'
 const { packageCode, getDefaultProtocol, deleteRecord, prepareInputs } = require('./utils')
 const CONFIGS = require('./config')
 
-class CloudComopnent extends Component {
+class ServerlessComopnent extends Component {
   async uploadCodeToCos(credentials, inputs, region, filePath) {
     const { appId } = this.credentials.tencent.tmpSecrets
     // 创建cos对象
@@ -211,7 +211,7 @@ class CloudComopnent extends Component {
   }
 
   async remove() {
-    console.log(`Removing Express App...`)
+    console.log(`Removing ${CONFIGS.frameworkFullname} App...`)
 
     const { state } = this
     const { regionList = [] } = state
@@ -256,4 +256,4 @@ class CloudComopnent extends Component {
   }
 }
 
-module.exports = CloudComopnent
+module.exports = ServerlessComopnent
