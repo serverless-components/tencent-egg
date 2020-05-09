@@ -4,6 +4,22 @@ const { packageCode, getDefaultProtocol, deleteRecord, prepareInputs } = require
 const CONFIGS = require('./config')
 
 class ServerlessComopnent extends Component {
+  getCredentials() {
+    const { tmpSecrets } = this.credentials.tencent
+
+    if (!tmpSecrets || !tmpSecrets.TmpSecretId) {
+      throw new Error(
+        'Cannot get secretId/Key, your account could be sub-account or does not have access, please check if SLS_QcsRole role exists in your account, and visit https://console.cloud.tencent.com/cam to bind this role to your account.'
+      )
+    }
+
+    return {
+      SecretId: tmpSecrets.TmpSecretId,
+      SecretKey: tmpSecrets.TmpSecretKey,
+      Token: tmpSecrets.Token
+    }
+  }
+
   async uploadCodeToCos(credentials, inputs, region, filePath) {
     const { appId } = this.credentials.tencent.tmpSecrets
     // 创建cos对象
@@ -85,6 +101,9 @@ class ServerlessComopnent extends Component {
   }
 
   async deployApigateway(credentials, inputs, regionList) {
+    if (inputs.isDisabled) {
+      return {}
+    }
     const apigw = new MultiApigw(credentials, regionList)
     inputs.oldState = {
       apiList: (this.state[regionList[0]] && this.state[regionList[0]].apiList) || []
@@ -162,13 +181,7 @@ class ServerlessComopnent extends Component {
   async deploy(inputs) {
     console.log(`Deploying ${CONFIGS.frameworkFullname} App...`)
 
-    // 获取腾讯云密钥信息
-    const { tmpSecrets } = this.credentials.tencent
-    const credentials = {
-      SecretId: tmpSecrets.TmpSecretId,
-      SecretKey: tmpSecrets.TmpSecretKey,
-      Token: tmpSecrets.Token
-    }
+    const credentials = this.getCredentials()
 
     // 对Inputs内容进行标准化
     const { regionList, functionConf, apigatewayConf, cnsConf } = await prepareInputs(
@@ -182,10 +195,15 @@ class ServerlessComopnent extends Component {
     if (!functionConf.code.src) {
       outputs.templateUrl = CONFIGS.templateUrl
     }
-    const [apigwOutputs, functionOutputs] = await Promise.all([
-      this.deployApigateway(credentials, apigatewayConf, regionList, outputs),
-      this.deployFunction(credentials, functionConf, regionList, outputs)
-    ])
+
+    const deployTasks = [this.deployFunction(credentials, functionConf, regionList, outputs)]
+    // support apigatewayConf.isDisabled
+    if (apigatewayConf.isDisabled !== true) {
+      deployTasks.push(this.deployApigateway(credentials, apigatewayConf, regionList, outputs))
+    } else {
+      this.state.apigwDisabled = true
+    }
+    const [functionOutputs, apigwOutputs = {}] = await Promise.all(deployTasks)
 
     // optimize outputs for one region
     if (regionList.length === 1) {
@@ -198,8 +216,8 @@ class ServerlessComopnent extends Component {
       outputs['scf'] = functionOutputs
     }
 
-    // 云解析遇到等API网关部署完成才可以继续部署
-    if (cnsConf.length > 0) {
+    // cns depends on apigw, so if disabled apigw, just ignore it.
+    if (cnsConf.length > 0 && apigatewayConf.isDisabled !== true) {
       outputs['cns'] = await this.deployCns(credentials, cnsConf, regionList, apigwOutputs)
     }
 
@@ -215,12 +233,9 @@ class ServerlessComopnent extends Component {
 
     const { state } = this
     const { regionList = [] } = state
-    const { tmpSecrets } = this.credentials.tencent
-    const credentials = {
-      SecretId: tmpSecrets.TmpSecretId,
-      SecretKey: tmpSecrets.TmpSecretKey,
-      Token: tmpSecrets.Token
-    }
+
+    const credentials = this.getCredentials()
+
     const removeHandlers = []
     for (let i = 0; i < regionList.length; i++) {
       const curRegion = regionList[i]
@@ -232,13 +247,16 @@ class ServerlessComopnent extends Component {
           functionName: curState.functionName,
           namespace: curState.namespace
         })
-        await apigw.remove({
-          created: curState.created,
-          environment: curState.environment,
-          serviceId: curState.serviceId,
-          apiList: curState.apiList,
-          customDomains: curState.customDomains
-        })
+        // if disable apigw, no need to remove
+        if (state.apigwDisabled !== true) {
+          await apigw.remove({
+            created: curState.created,
+            environment: curState.environment,
+            serviceId: curState.serviceId,
+            apiList: curState.apiList,
+            customDomains: curState.customDomains
+          })
+        }
       }
       removeHandlers.push(handler())
     }
