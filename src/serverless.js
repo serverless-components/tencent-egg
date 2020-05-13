@@ -105,8 +105,10 @@ class ServerlessComopnent extends Component {
       return {}
     }
     const apigw = new MultiApigw(credentials, regionList)
+    const oldState = this.state[regionList[0]] || {}
     inputs.oldState = {
-      apiList: (this.state[regionList[0]] && this.state[regionList[0]].apiList) || []
+      apiList: oldState.apiList || [],
+      customDomains: oldState.customDomains || []
     }
     const apigwOutputs = await apigw.deploy(inputs)
     const outputs = {}
