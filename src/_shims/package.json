@@ -8,6 +8,6 @@
   "author": "Tencent Cloud, Inc.",
   "license": "MIT",
   "dependencies": {
-    "tencent-serverless-http": "^1.0.7"
+    "tencent-serverless-http": "^1.2.0"
   }
 }
