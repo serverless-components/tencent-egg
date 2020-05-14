@@ -1,8 +1,8 @@
 const path = require('path')
 const fs = require('fs')
 const { createServer, proxy } = require('tencent-serverless-http')
-let app = require('./sls')
 
+let app
 let server
 
 module.exports.handler = async (event, context) => {
@@ -11,6 +11,8 @@ module.exports.handler = async (event, context) => {
     // eslint-disable-next-line
     console.log('Using user custom sls.js')
     app = require(userSls)
+  } else {
+    app = require('./sls')
   }
 
   if (!server) {
