@@ -6,7 +6,7 @@
   "dependencies": {
     "download": "^8.0.0",
     "fs-extra": "^8.1.0",
-    "tencent-component-toolkit": "^1.4.3",
+    "tencent-component-toolkit": "^1.5.5",
     "type": "^2.0.0"
   }
 }
