@@ -1,10 +1,10 @@
 name: egg
-version: 0.0.3
-author: Tencent Cloud Inc.
-org: Tencent Cloud Inc.
+version: dev
+author: Tencent Cloud, Inc.
+org: Tencent Cloud, Inc.
 description: Deploys a serverless Egg.js application onto Tencent SCF and Tencent APIGateway.
 keywords: tencent, serverless, egg.js
 repo: https://github.com/serverless-components/tencent-egg/tree/v2
-readme: https://github.com/serverless-components/tencent-egg/tree/v2
+readme: https://github.com/serverless-components/tencent-egg/tree/v2/README.md
 license: MIT
 main: ./src

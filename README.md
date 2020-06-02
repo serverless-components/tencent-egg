@@ -21,9 +21,8 @@
 #### 初始化 Egg 项目
 
 ```bash
-$ mkdir serverless-egg && cd serverless-egg
-$ npm init egg src --type=simple
-$ cd src && npm install
+$ npm init egg serverless-egg --type=simple
+$ cd serverless-egg && npm install
 ```
 
 #### 修改 Egg 配置
@@ -65,7 +64,10 @@ component: egg@0.0.0-dev
 name: eggDemo
 
 inputs:
-  src: ./src
+  src:
+    src: ./
+    exclude:
+      - .env
   region: ap-guangzhou
   functionName: eggDemo
   runtime: Nodejs10.15
@@ -76,7 +78,7 @@ inputs:
     environment: release
 ```
 
-- [更多配置](https://github.com/serverless-components/tencent-egg/tree/master/docs/configure.md)
+- [更多配置](https://github.com/serverless-components/tencent-egg/tree/v2/docs/configure.md)
 
 ### 3. 部署
 

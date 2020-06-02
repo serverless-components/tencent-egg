@@ -15,12 +15,23 @@ module.exports.handler = async (event, context) => {
     app = require('./sls')
   }
 
+  // attach event and context to request
+  app.request.__SLS_EVENT__ = event
+  app.request.__SLS_CONTEXT__ = context
+
+  // cache server, not create repeatly
   if (!server) {
     server = createServer(app.callback(), null, app.binaryTypes || [])
   }
 
   context.callbackWaitsForEmptyEventLoop =
-    app.callbackWaitsForEmptyEventLoop === false ? false : true
+    app.callbackWaitsForEmptyEventLoop === true ? true : false
 
-  return proxy(server, event, context, 'PROMISE').promise
+  // provide sls intialize hooks
+  if (app.slsInitialize && typeof app.slsInitialize === 'function') {
+    await app.slsInitialize()
+  }
+
+  const result = await proxy(server, event, context, 'PROMISE')
+  return result.promise
 }

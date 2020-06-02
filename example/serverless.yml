@@ -1,11 +1,14 @@
 org: orgDemo
 app: appDemo
 stage: dev
-component: egg
+component: egg@dev
 name: eggDemo
 
 inputs:
-  src: ./src
+  src:
+    src: ./
+    exclude:
+      - .env
   region: ap-guangzhou
   runtime: Nodejs10.15
   apigatewayConf:

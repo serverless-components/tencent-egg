@@ -22,9 +22,8 @@
 #### Init Egg Project
 
 ```bash
-$ mkdir serverless-egg && cd serverless-egg
-$ npm init egg src --type=simple
-$ cd src && npm install
+$ npm init egg serverless-egg --type=simple
+$ cd serverless-egg && npm install
 ```
 
 #### Change Egg Config
@@ -78,7 +77,10 @@ component: egg@0.0.0-dev
 name: eggDemo
 
 inputs:
-  src: ./src
+  src:
+    src: ./
+    exclude:
+      - .env
   region: ap-guangzhou
   functionName: eggDemo
   runtime: Nodejs10.15
@@ -89,7 +91,7 @@ inputs:
     environment: release
 ```
 
-- [More Options](https://github.com/serverless-components/tencent-egg/blob/master/docs/configure.md)
+- [More Options](https://github.com/serverless-components/tencent-egg/tree/v2/docs/configure.md)
 
 > Notice: Now, `runtime` is default `Nodejs8.9`, for deployed project using `Nodejs8.9`, should set `runtime` to `Nodejs8.9` manually for updating.
 
