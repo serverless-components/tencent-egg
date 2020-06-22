@@ -1,5 +1,6 @@
 const { Component } = require('@serverless/core')
 const { MultiApigw, Scf, Apigw, Cns, Cam, Metrics } = require('tencent-component-toolkit')
+const { TypeError } = require('tencent-component-toolkit/src/utils/error')
 const { uploadCodeToCos, getDefaultProtocol, deleteRecord, prepareInputs } = require('./utils')
 const CONFIGS = require('./config')
 
@@ -8,7 +9,8 @@ class ServerlessComponent extends Component {
     const { tmpSecrets } = this.credentials.tencent
 
     if (!tmpSecrets || !tmpSecrets.TmpSecretId) {
-      throw new Error(
+      throw new TypeError(
+        'CREDENTIAL',
         'Cannot get secretId/Key, your account could be sub-account and does not have the access to use SLS_QcsRole, please make sure the role exists first, then visit https://cloud.tencent.com/document/product/1154/43006, follow the instructions to bind the role to your account.'
       )
     }
@@ -247,11 +249,11 @@ class ServerlessComponent extends Component {
   async metrics(inputs = {}) {
     console.log(`Get ${CONFIGS.compFullname} Metrics Datas...`)
     if (!inputs.rangeStart || !inputs.rangeEnd) {
-      throw new Error('rangeStart and rangeEnd are require inputs')
+      throw new TypeError('PARAMETER_EGG_METRICS', 'rangeStart and rangeEnd are require inputs')
     }
     const { region } = this.state
     if (!region) {
-      throw new Error('No region property in state')
+      throw new TypeError('PARAMETER_EGG_METRICS', 'No region property in state')
     }
     const { functionName, namespace, functionVersion } = this.state[region] || {}
     if (functionName) {
@@ -271,7 +273,7 @@ class ServerlessComponent extends Component {
       )
       return metricResults
     }
-    throw new Error('function name not define')
+    throw new TypeError('PARAMETER_EGG_METRICS', 'Function name not define')
   }
 }
 
