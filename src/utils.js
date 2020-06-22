@@ -22,7 +22,7 @@ const generateId = () =>
     .substring(6)
 
 const getCodeZipPath = async (instance, inputs) => {
-  console.log(`Packaging ${CONFIGS.frameworkFullname} application...`)
+  console.log(`Packaging ${CONFIGS.compFullname} application...`)
 
   // unzip source zip file
   let zipPath
@@ -31,7 +31,7 @@ const getCodeZipPath = async (instance, inputs) => {
     const downloadPath = `/tmp/${generateId()}`
     const filename = 'template'
 
-    console.log(`Installing Default ${CONFIGS.frameworkFullname} App...`)
+    console.log(`Installing Default ${CONFIGS.compFullname} App...`)
     await download(CONFIGS.templateUrl, downloadPath, {
       filename: `${filename}.zip`
     })
@@ -175,7 +175,7 @@ const deleteRecord = (newRecords, historyRcords) => {
 const prepareInputs = async (instance, credentials, inputs = {}) => {
   // 对function inputs进行标准化
   const tempFunctionConf = inputs.functionConf ? inputs.functionConf : {}
-  const fromClientRemark = `tencent-${CONFIGS.framework}`
+  const fromClientRemark = `tencent-${CONFIGS.compName}`
   const regionList = inputs.region
     ? typeof inputs.region == 'string'
       ? [inputs.region]
@@ -197,7 +197,7 @@ const prepareInputs = async (instance, credentials, inputs = {}) => {
     name:
       ensureString(inputs.functionName, { isOptional: true }) ||
       stateFunctionName ||
-      `${CONFIGS.framework}_component_${generateId()}`,
+      `${CONFIGS.compName}_component_${generateId()}`,
     region: regionList,
     role: ensureString(tempFunctionConf.role ? tempFunctionConf.role : inputs.role, {
       default: ''
@@ -256,7 +256,7 @@ const prepareInputs = async (instance, credentials, inputs = {}) => {
   apigatewayConf.fromClientRemark = fromClientRemark
   apigatewayConf.serviceName = inputs.serviceName
   apigatewayConf.description = `Serverless Framework Tencent-${capitalString(
-    CONFIGS.framework
+    CONFIGS.compName
   )} Component`
   apigatewayConf.serviceId = inputs.serviceId || stateServiceId
   apigatewayConf.region = functionConf.region
@@ -274,6 +274,20 @@ const prepareInputs = async (instance, credentials, inputs = {}) => {
       }
     }
   ]
+  if (apigatewayConf.usagePlan) {
+    apigatewayConf.endpoints[0].usagePlan = {
+      usagePlanId: apigatewayConf.usagePlan.usagePlanId,
+      usagePlanName: apigatewayConf.usagePlan.usagePlanName,
+      usagePlanDesc: apigatewayConf.usagePlan.usagePlanDesc,
+      maxRequestNum: apigatewayConf.usagePlan.maxRequestNum
+    }
+  }
+  if (apigatewayConf.auth) {
+    apigatewayConf.endpoints[0].auth = {
+      secretName: apigatewayConf.auth.secretName,
+      secretIds: apigatewayConf.auth.secretIds
+    }
+  }
 
   // 对cns inputs进行标准化
   const tempCnsConf = {}

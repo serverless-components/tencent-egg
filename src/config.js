@@ -1,7 +1,7 @@
 const CONFIGS = {
   templateUrl: 'https://serverless-templates-1300862921.cos.ap-beijing.myqcloud.com/egg-demo.zip',
-  framework: 'egg',
-  frameworkFullname: 'Egg.js',
+  compName: 'egg',
+  compFullname: 'Egg.js',
   handler: 'sl_handler.handler',
   runtime: 'Nodejs10.15',
   exclude: ['.git/**', '.gitignore', '.DS_Store'],

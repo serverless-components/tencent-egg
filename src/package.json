@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "download": "^8.0.0",
-    "tencent-component-toolkit": "^1.8.3",
+    "tencent-component-toolkit": "^1.11.2",
     "type": "^2.0.0"
   }
 }
