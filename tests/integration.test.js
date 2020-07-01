@@ -14,7 +14,7 @@ const instanceYaml = {
   name: `egg-integration-tests-${generateId()}`,
   stage: 'dev',
   inputs: {
-    region: 'ap-guangzhou',
+    region: 'na-toronto',
     runtime: 'Nodejs8.9',
     apigatewayConf: { environment: 'test' }
   }
