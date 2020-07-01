@@ -4,7 +4,7 @@ const path = require('path')
 const axios = require('axios')
 
 // set enough timeout for deployment to finish
-jest.setTimeout(300000)
+jest.setTimeout(600000)
 
 // the yaml file we're testing against
 const instanceYaml = {
@@ -14,7 +14,7 @@ const instanceYaml = {
   name: `egg-integration-tests-${generateId()}`,
   stage: 'dev',
   inputs: {
-    region: 'na-toronto',
+    region: 'ap-hongkong',
     runtime: 'Nodejs8.9',
     apigatewayConf: { environment: 'test' }
   }
