@@ -1,11 +1,7 @@
 {
-  "name": "@serverless/egg",
-  "main": "./serverless.js",
-  "author": "Tencent Cloud, Inc.",
-  "license": "MIT",
   "dependencies": {
     "download": "^8.0.0",
-    "tencent-component-toolkit": "^1.11.4",
+    "tencent-component-toolkit": "^1.12.9",
     "type": "^2.0.0"
   }
 }

@@ -7,7 +7,8 @@ const CONFIGS = {
   exclude: ['.git/**', '.gitignore', '.DS_Store'],
   timeout: 3,
   memorySize: 128,
-  namespace: 'default'
+  namespace: 'default',
+  description: 'Created by Serverless Component'
 }
 
 module.exports = CONFIGS
