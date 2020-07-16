@@ -8,3 +8,4 @@ repo: https://github.com/serverless-components/tencent-egg
 readme: https://github.com/serverless-components/tencent-egg/tree/master/README.md
 license: MIT
 main: ./src
+webDeployable: true
