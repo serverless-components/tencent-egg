@@ -12,6 +12,7 @@ inputs:
   region: ap-guangzhou
   runtime: Nodejs10.15
   apigatewayConf:
+    isDisabled: true
     protocols:
       - http
       - https
