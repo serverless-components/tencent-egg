@@ -73,7 +73,7 @@ TENCENT_SECRET_KEY=XXX
 org: orgDemo
 app: appDemo
 stage: dev
-component: egg@0.0.0-dev
+component: egg
 name: eggDemo
 
 inputs:
