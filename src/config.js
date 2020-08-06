@@ -4,7 +4,6 @@ const CONFIGS = {
   compFullname: 'Egg.js',
   handler: 'sl_handler.handler',
   runtime: 'Nodejs10.15',
-  exclude: ['.git/**', '.gitignore', '.DS_Store'],
   timeout: 3,
   memorySize: 128,
   namespace: 'default',
