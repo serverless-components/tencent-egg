@@ -1,6 +1,5 @@
 {
   "name": "@serverless/egg",
-  "version": "0.0.10",
   "main": "src/serverless.js",
   "publishConfig": {
     "access": "public"
