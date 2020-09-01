@@ -1,3 +1,10 @@
+## [0.0.11](https://github.com/serverless-components/tencent-egg/compare/v0.0.10...v0.0.11) (2020-09-01)
+
+
+### Bug Fixes
+
+* support cfs ([516ab0e](https://github.com/serverless-components/tencent-egg/commit/516ab0e1dee7965bfd5a318b528d95a1e994e041))
+
 ## [0.0.10](https://github.com/serverless-components/tencent-egg/compare/v0.0.9...v0.0.10) (2020-08-26)
 
 
