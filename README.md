@@ -2,7 +2,7 @@
 
 # 腾讯云 Egg.js Serverless Component
 
-简体中文 | [English](https://github.com/serverless-components/tencent-egg/blob/master/README.en.md)
+简体中文 | [English](./README.en.md)
 
 ## 简介
 
@@ -78,7 +78,7 @@ inputs:
     environment: release
 ```
 
-- [更多配置](https://github.com/serverless-components/tencent-egg/tree/v2/docs/configure.md)
+- [更多配置](/docs/configure.md)
 
 ### 3. 部署
 

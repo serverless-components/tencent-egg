@@ -2,7 +2,7 @@
 
 # Tencent Egg.js Serverless Component
 
-[简体中文](https://github.com/serverless-components/tencent-egg/blob/master/README.md) | English
+[简体中文](./README.md) | English
 
 ## Introduction
 
@@ -91,7 +91,7 @@ inputs:
     environment: release
 ```
 
-- [More Options](https://github.com/serverless-components/tencent-egg/tree/v2/docs/configure.md)
+- [More Options](/docs/configure.md)
 
 > Notice: Now, `runtime` is default `Nodejs8.9`, for deployed project using `Nodejs8.9`, should set `runtime` to `Nodejs8.9` manually for updating.
 
