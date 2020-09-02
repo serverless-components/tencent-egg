@@ -1,3 +1,10 @@
+## [0.0.12](https://github.com/serverless-components/tencent-egg/compare/v0.0.11...v0.0.12) (2020-09-02)
+
+
+### Bug Fixes
+
+* update tencnet-component-toolkit for api mark ([aadd04f](https://github.com/serverless-components/tencent-egg/commit/aadd04fbed4fb0fc4b2e9576113366a66c35226c))
+
 ## [0.0.11](https://github.com/serverless-components/tencent-egg/compare/v0.0.10...v0.0.11) (2020-09-01)
 
 
