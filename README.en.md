@@ -91,7 +91,7 @@ inputs:
     environment: release
 ```
 
-- [More Options](/docs/configure.md)
+- [More Options](https://github.com/serverless-components/tencent-egg/tree/master/docs/configure.md)
 
 > Notice: Now, `runtime` is default `Nodejs8.9`, for deployed project using `Nodejs8.9`, should set `runtime` to `Nodejs8.9` manually for updating.
 
@@ -118,3 +118,9 @@ After egg project initialed, it will create `app/public` directory automatically
 ### More Components
 
 Checkout the [Serverless Components](https://github.com/serverless/components) repo for more information.
+
+## License
+
+MIT License
+
+Copyright (c) 2020 Tencent Cloud, Inc.

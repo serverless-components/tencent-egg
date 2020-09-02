@@ -18,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lygsec && int-staged",
+      "pre-commit": "ygsec && lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-push": "ygsec && npm run lint:fix && npm run prettier:fix"
     }

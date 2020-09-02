@@ -2,7 +2,7 @@
 
 # 腾讯云 Egg.js Serverless Component
 
-简体中文 | [English](./README.en.md)
+简体中文 | [English](https://github.com/serverless-components/tencent-egg/tree/master/README.en.md)
 
 ## 简介
 
@@ -78,7 +78,7 @@ inputs:
     environment: release
 ```
 
-- [更多配置](/docs/configure.md)
+- [更多配置](https://github.com/serverless-components/tencent-egg/tree/master/docs/configure.md)
 
 ### 3. 部署
 
@@ -121,3 +121,9 @@ TENCENT_SECRET_KEY=XXX
 ### 更多组件
 
 可以在 [Serverless Components](https://github.com/serverless/components) repo 中查询更多组件的信息。
+
+## License
+
+MIT License
+
+Copyright (c) 2020 Tencent Cloud, Inc.
