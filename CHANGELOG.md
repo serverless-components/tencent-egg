@@ -1,3 +1,11 @@
+## [0.0.13](https://github.com/serverless-components/tencent-egg/compare/v0.0.12...v0.0.13) (2020-09-07)
+
+
+### Bug Fixes
+
+* update deploy flow for multi region ([01a76c0](https://github.com/serverless-components/tencent-egg/commit/01a76c0372bf6d7ff6c2dbe640fc6a38d0b3d2ff))
+* update deps ([2345236](https://github.com/serverless-components/tencent-egg/commit/2345236aac0f26dc446b4a652fb0b0eb72f2b22b))
+
 ## [0.0.12](https://github.com/serverless-components/tencent-egg/compare/v0.0.11...v0.0.12) (2020-09-02)
 
 
