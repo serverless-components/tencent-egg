@@ -2,6 +2,7 @@ const CONFIGS = {
   templateUrl: 'https://serverless-templates-1300862921.cos.ap-beijing.myqcloud.com/egg-demo.zip',
   compName: 'egg',
   compFullname: 'Egg.js',
+  defaultEntryFile: 'sls.js',
   handler: 'sl_handler.handler',
   runtime: 'Nodejs10.15',
   timeout: 3,
