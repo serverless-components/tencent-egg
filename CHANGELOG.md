@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/serverless-components/tencent-egg/compare/v0.0.13...v0.1.0) (2020-10-12)
+
+
+### Features
+
+* support custom entry file ([12ed97b](https://github.com/serverless-components/tencent-egg/commit/12ed97b5a717e4dbf42a14e6838109e6e3343998))
+
 ## [0.0.13](https://github.com/serverless-components/tencent-egg/compare/v0.0.12...v0.0.13) (2020-09-07)
 
 
