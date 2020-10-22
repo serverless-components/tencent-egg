@@ -45,9 +45,9 @@ serverless deploy
 
 ### 4. 配置
 
-Egg 组件支持 0 配置部署，也就是可以直接通过配置文件中的默认值进行部署。但你依然可以修改更多可选配置来进一步开发该 Express 项目。
+Egg 组件支持 0 配置部署，也就是可以直接通过配置文件中的默认值进行部署。但你依然可以修改更多可选配置来进一步开发该 Egg 项目。
 
-以下是 Express 组件的 `serverless.yml`配置示例：
+以下是 Egg 组件的 `serverless.yml`配置示例：
 
 ```yml
 # serverless.yml
