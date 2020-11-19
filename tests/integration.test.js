@@ -1,10 +1,15 @@
+const path = require('path')
+require('dotenv').config({
+  path: path.join(__dirname, '..', '.env.test')
+})
 const { generateId, getServerlessSdk } = require('./utils')
 const execSync = require('child_process').execSync
-const path = require('path')
 const axios = require('axios')
 
 // set enough timeout for deployment to finish
 jest.setTimeout(600000)
+
+const srcPath = path.join(__dirname, '..', 'example')
 
 // the yaml file we're testing against
 const instanceYaml = {
@@ -14,27 +19,31 @@ const instanceYaml = {
   name: `egg-integration-tests-${generateId()}`,
   stage: 'dev',
   inputs: {
+    src: srcPath,
     region: 'ap-guangzhou',
     runtime: 'Nodejs10.15',
     apigatewayConf: { environment: 'test' }
   }
 }
 
-// get credentials from process.env but need to init empty credentials object
 const credentials = {
-  tencent: {}
+  tencent: {
+    SecretId: process.env.TENCENT_SECRET_ID,
+    SecretKey: process.env.TENCENT_SECRET_KEY,
+  }
 }
 
 // get serverless construct sdk
 const sdk = getServerlessSdk(instanceYaml.org)
 
 it('should successfully deploy egg app', async () => {
-  const instance = await sdk.deploy(instanceYaml, { tencent: {} })
+  execSync('npm install --production', { cwd: srcPath })
+
+  const instance = await sdk.deploy(instanceYaml, credentials)
 
   expect(instance).toBeDefined()
   expect(instance.instanceName).toEqual(instanceYaml.name)
   // get src from template by default
-  expect(instance.outputs.templateUrl).toBeDefined()
   expect(instance.outputs.region).toEqual(instanceYaml.inputs.region)
   expect(instance.outputs.apigw).toBeDefined()
   expect(instance.outputs.apigw.environment).toEqual(instanceYaml.inputs.apigatewayConf.environment)
@@ -42,7 +51,7 @@ it('should successfully deploy egg app', async () => {
   expect(instance.outputs.scf.runtime).toEqual(instanceYaml.inputs.runtime)
 
   const response = await axios.get(instance.outputs.apigw.url)
-  expect(response.data.includes('Hello Egg.js')).toBeTruthy()
+  expect(response.data.includes('Serverless Egg.js Application')).toBeTruthy()
 })
 
 it('should successfully remove egg app', async () => {
