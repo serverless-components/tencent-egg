@@ -17,11 +17,12 @@ body {
   text-decoration: none;
   margin-top: 10px;
   font-size: 30px;
-  color: #6e717c;
+  color: #148a1a;
 }
 
 .link:hover {
-  color: #148a1a;
+  color: #56b38f;
+  text-decoration: underline;
 }
 
 .banner {
