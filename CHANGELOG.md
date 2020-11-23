@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/serverless-components/tencent-egg/compare/v0.1.0...v0.1.1) (2020-11-23)
+
+
+### Bug Fixes
+
+* optimize config flow ([#20](https://github.com/serverless-components/tencent-egg/issues/20)) ([fd7a549](https://github.com/serverless-components/tencent-egg/commit/fd7a549d90b10e613894addca688a60ffd7754d0))
+
 # [0.1.0](https://github.com/serverless-components/tencent-egg/compare/v0.0.13...v0.1.0) (2020-10-12)
 
 
