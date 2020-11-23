@@ -5,6 +5,7 @@ const ensureIterable = require('type/iterable/ensure')
 const ensureString = require('type/string/ensure')
 const download = require('download')
 const { TypeError } = require('tencent-component-toolkit/src/utils/error')
+const AdmZip = require('adm-zip')
 const CONFIGS = require('./config')
 
 /*
@@ -70,6 +71,17 @@ const validateTraffic = (num) => {
   return true
 }
 
+const generatePublicDir = (zipPath) => {
+  const zip = new AdmZip(zipPath)
+  const entries = zip.getEntries()
+  const [entry] = entries.filter((e) => e.entryName === 'app/public/' && e.name === '')
+  if (!entry) {
+    const extraPublicPath = path.join(__dirname, 'fixtures/public')
+    zip.addLocalFolder(extraPublicPath, 'app/public')
+    zip.writeZip()
+  }
+}
+
 const getCodeZipPath = async (instance, inputs) => {
   console.log(`Packaging ${CONFIGS.compFullname} application...`)
 
@@ -92,6 +104,9 @@ const getCodeZipPath = async (instance, inputs) => {
   } else {
     zipPath = inputs.code.src
   }
+
+  // auto create public dir
+  generatePublicDir(zipPath)
 
   return zipPath
 }
@@ -242,11 +257,13 @@ const prepareInputs = async (instance, credentials, inputs = {}) => {
     functionConf.environment.variables = functionConf.environment.variables || {}
     functionConf.environment.variables.SERVERLESS = '1'
     functionConf.environment.variables.SLS_ENTRY_FILE = inputs.entryFile || CONFIGS.defaultEntryFile
+    functionConf.environment.variables.EGG_APP_CONFIG = CONFIGS.EGG_APP_CONFIG
   } else {
     functionConf.environment = {
       variables: {
         SERVERLESS: '1',
-        SLS_ENTRY_FILE: inputs.entryFile || CONFIGS.defaultEntryFile
+        SLS_ENTRY_FILE: inputs.entryFile || CONFIGS.defaultEntryFile,
+        EGG_APP_CONFIG: CONFIGS.EGG_APP_CONFIG
       }
     }
   }

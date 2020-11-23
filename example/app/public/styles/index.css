@@ -12,6 +12,18 @@ html {
 body {
   margin: 0;
 }
+
+.link {
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 30px;
+  color: #6e717c;
+}
+
+.link:hover {
+  color: #148a1a;
+}
+
 .banner {
   text-align: center;
   padding: 100px 0;
