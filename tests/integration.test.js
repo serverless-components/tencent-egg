@@ -19,7 +19,6 @@ const instanceYaml = {
   name: `egg-integration-tests-${generateId()}`,
   stage: 'dev',
   inputs: {
-    src: srcPath,
     region: 'ap-guangzhou',
     runtime: 'Nodejs10.15',
     apigatewayConf: { environment: 'test' }
@@ -36,14 +35,33 @@ const credentials = {
 // get serverless construct sdk
 const sdk = getServerlessSdk(instanceYaml.org)
 
-it('should successfully deploy egg app', async () => {
-  execSync('npm install --production', { cwd: srcPath })
-
+it('Using template should deploy success', async () => {
   const instance = await sdk.deploy(instanceYaml, credentials)
 
   expect(instance).toBeDefined()
   expect(instance.instanceName).toEqual(instanceYaml.name)
   // get src from template by default
+  expect(instance.outputs.templateUrl).toBeDefined()
+  expect(instance.outputs.region).toEqual(instanceYaml.inputs.region)
+  expect(instance.outputs.apigw).toBeDefined()
+  expect(instance.outputs.apigw.environment).toEqual(instanceYaml.inputs.apigatewayConf.environment)
+  expect(instance.outputs.scf).toBeDefined()
+  expect(instance.outputs.scf.runtime).toEqual(instanceYaml.inputs.runtime)
+
+  const response = await axios.get(instance.outputs.apigw.url)
+  expect(response.data.includes('Serverless Egg.js Application')).toBeTruthy()
+})
+
+it('Using src code should deploy success', async () => {
+  execSync('npm install --production', { cwd: srcPath })
+  instanceYaml.inputs.src = {
+    src: srcPath
+  }
+
+  const instance = await sdk.deploy(instanceYaml, credentials)
+
+  expect(instance).toBeDefined()
+  expect(instance.instanceName).toEqual(instanceYaml.name)
   expect(instance.outputs.region).toEqual(instanceYaml.inputs.region)
   expect(instance.outputs.apigw).toBeDefined()
   expect(instance.outputs.apigw.environment).toEqual(instanceYaml.inputs.apigatewayConf.environment)
