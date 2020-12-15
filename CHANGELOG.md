@@ -1,3 +1,10 @@
+## [0.1.2](https://github.com/serverless-components/tencent-egg/compare/v0.1.1...v0.1.2) (2020-12-15)
+
+
+### Bug Fixes
+
+* update deploy and remove to serial flow ([#21](https://github.com/serverless-components/tencent-egg/issues/21)) ([5ccc925](https://github.com/serverless-components/tencent-egg/commit/5ccc92572812a01e146795ad18f4f2afa5aa930f))
+
 ## [0.1.1](https://github.com/serverless-components/tencent-egg/compare/v0.1.0...v0.1.1) (2020-11-23)
 
 
