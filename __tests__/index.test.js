@@ -1,13 +1,7 @@
 const path = require('path')
-require('dotenv').config({
-  path: path.join(__dirname, '..', '.env.test')
-})
-const { generateId, getServerlessSdk } = require('./utils')
+const { generateId, getServerlessSdk } = require('./lib/utils')
 const execSync = require('child_process').execSync
 const axios = require('axios')
-
-// set enough timeout for deployment to finish
-jest.setTimeout(600000)
 
 const srcPath = path.join(__dirname, '..', 'example')
 
