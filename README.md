@@ -43,6 +43,11 @@ serverless deploy
 
 > **说明**：如果鉴权失败，请参考 [权限配置](https://cloud.tencent.com/document/product/1154/43006) 进行授权。
 
+
+部署完成后，控制台会打印相关的输出信息，您可以通过 `${output:${stage}:${app}:apigw.url}` 的形式在其他 `serverless` 组件中引用该组件的 API 网关访问链接（或通过类似的形式引用该组建其他输出结果），具体的，可以查看完成的输出文档：
+
+- [点击此处查看输出文档](https://github.com/serverless-components/tencent-egg/tree/master/docs/output.md)
+
 ### 4. 配置
 
 Egg 组件支持 0 配置部署，也就是可以直接通过配置文件中的默认值进行部署。但你依然可以修改更多可选配置来进一步开发该 Egg 项目。
